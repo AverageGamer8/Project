@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dypw6ntxewcf3"]
+
+[ext_resource type="Texture2D" uid="uid://dx4kpgnvb7y5k" path="res://assets/art/Sprite-0001.png" id="1_e5oij"]
+[ext_resource type="Script" path="res://scenes/level_objects/cabinet.gd" id="1_vjbjy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtnv"]
+atlas = ExtResource("1_e5oij")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wnstw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtnv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oq3n1"]
+
+[node name="cabinet" type="Area2D"]
+script = ExtResource("1_vjbjy")
+money = 130
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wnstw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_oq3n1")
