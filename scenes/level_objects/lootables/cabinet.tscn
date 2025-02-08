@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dypw6ntxewcf3"]
+
+[ext_resource type="Script" path="res://scenes/level_objects/lootables/lootable.gd" id="1_13h41"]
+[ext_resource type="Texture2D" uid="uid://cjhjuvusbgshv" path="res://assets/art/furnitures.png" id="2_iqygy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyrmp"]
+atlas = ExtResource("2_iqygy")
+region = Rect2(0, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyt78"]
+atlas = ExtResource("2_iqygy")
+region = Rect2(64, 128, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wnstw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyrmp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyt78")
+}],
+"loop": true,
+"name": &"looted",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oq3n1"]
+
+[node name="cabinet" type="Area2D" groups=["Lootable"]]
+script = ExtResource("1_13h41")
+money = 130
+water = 0.2
+use_time = 3.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -64)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_wnstw")
+animation = &"looted"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_oq3n1")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

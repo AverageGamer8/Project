@@ -15,6 +15,8 @@ var right_adj : HeatCell
 @export var heat_loss : float
 @export var environment_temp : float
 
+var player : Player = null
+
 func _ready() -> void:
 	smoke_count = 0
 	up_adj = get_heatcell(cell_pos + Vector2i.UP)
@@ -23,14 +25,18 @@ func _ready() -> void:
 	right_adj = get_heatcell(cell_pos + Vector2i.RIGHT)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if(body.is_in_group("smoke")):
+	if(body.is_in_group("Smoke")):
 		smoke_count += 1
+	if body.is_in_group("Player"):
+		player = body
 	pass # Replace with function body.
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if(body.is_in_group("smoke")):
+	if(body.is_in_group("Smoke")):
 		smoke_count -= 1
+	if body.is_in_group("Player"):
+		player = null
 	pass # Replace with function body.
 
 func get_heatcell(cell: Vector2i) -> HeatCell:
@@ -42,7 +48,7 @@ func get_heatcell(cell: Vector2i) -> HeatCell:
 
 func _on_tick_timeout() -> void:
 	add_heat(smoke_count * heat_per_smoke)
-	$ColorRect.color.a8 = minf(temperature, 255)
+	$ColorRect.color.a8 = minf(temperature, 255) / 3
 	$Label.text = str(floor(temperature))
 	if up_adj:
 		var amount = (temperature - up_adj.temperature) * conductivity
@@ -62,6 +68,11 @@ func _on_tick_timeout() -> void:
 		temperature -= amount
 	
 	temperature -= (temperature - environment_temp) * heat_loss
+	
+	if player:
+		player.conduct_heat(temperature)
+		
+	
 
 func add_heat(heat : float):
 	if temperature > 255:

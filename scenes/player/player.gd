@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-# movement parameters (play with them in the inspector ->)
 @export var STD_SPEED: float = 500
 @export var ACCEL_TIME: float = 0.1  # time to full speed in seconds
 @export var STD_JUMP_VELOCITY: float = -1000 # (negative is up, positive is down)
@@ -20,19 +19,29 @@ var lockpicking_timer : float
 
 var knockback := Vector2.ZERO
 
+@export var heat_sensitivity : float
+@export var heat_recover : float
+@export var standard_body_temperature : float
+@export var stroke_thres : float
+@export var water_temp : float
 var temperature: float = 50
 var health : float = 100
 var money : float = 0
+
 # for friction
 var tile_map_layer: TileMapLayer = null
 @onready var tile_collider := $TileCollider
 var friction: float = 1
+
+
+
 
 func _ready() -> void:
 	$AnimatedSprite2D.play()
 	$UI/Health.value = health
 	$UI/Temperature.value = temperature
 	$UI/Money.text = ("$ " + str(money))
+	health = 100
 	
 	
 # Handles player input and movement
@@ -52,8 +61,7 @@ func _physics_process(delta: float) -> void:
 			$AnimatedSprite2D.play()
 			$Progress .hide()
 		
-	speed = minf(STD_SPEED, (1.75*STD_SPEED - STD_SPEED * temperature * 0.0125))
-	jumpspeed = maxf(STD_JUMP_VELOCITY, (1.75*STD_JUMP_VELOCITY - STD_JUMP_VELOCITY * temperature * 0.0125))
+	
 	# Add gravity if in the air
 	if not is_on_floor():
 		var grav := 0.0
@@ -179,9 +187,9 @@ func set_knockback(knock : Vector2) -> bool:
 	return false
 
 func cool_down(water : float):
-	if(temperature < 20):
+	if(temperature < water_temp):
 		return
-	temperature -= (temperature - 20) * water
+	temperature -= (temperature - water_temp) * water
 	$UI/Temperature.value = temperature
 
 func add_money(amount : float):
@@ -204,3 +212,22 @@ func interrupt_lockpicking():
 		$AnimatedSprite2D.play()
 		$Progress .hide()
 		EventBus.player_lockpicking_interrupt.emit()
+
+func conduct_heat(env_temp : float):
+	if env_temp > standard_body_temperature:
+		temperature += (env_temp - temperature)* heat_sensitivity
+	temperature += (standard_body_temperature - temperature) * heat_recover
+	$UI/Temperature.value = temperature
+	
+	if temperature > stroke_thres:
+		jumpspeed = STD_JUMP_VELOCITY * 0.75
+		speed = STD_SPEED * 0.5
+		$AnimatedSprite2D.speed_scale = 0.5
+	else:
+		jumpspeed = STD_JUMP_VELOCITY
+		speed = STD_SPEED
+		$AnimatedSprite2D.speed_scale = 1
+	
+	if temperature >= 100 :
+		hurt(temperature / 15)
+	pass

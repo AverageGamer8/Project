@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
-"speed": 8.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -144,7 +144,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 8.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,7 +161,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 8.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -184,7 +184,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"pick",
-"speed": 8.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 8.0
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucb8u"]
@@ -224,16 +224,20 @@ size = Vector2(46, 85)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 200
+collision_layer = 17
 collision_mask = 3
 script = ExtResource("1_mvwvm")
+heat_sensitivity = 0.02
+heat_recover = 0.001
+standard_body_temperature = 30.0
+stroke_thres = 65.0
+water_temp = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 20)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ntf1i")
-animation = &"pick"
-frame_progress = 0.781084
-speed_scale = 1.8
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 21.5)
@@ -288,6 +292,7 @@ theme = ExtResource("5_fc2k0")
 text = "$ "
 
 [node name="Progress" type="ProgressBar" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

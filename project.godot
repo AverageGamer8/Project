@@ -38,8 +38,8 @@ project/assembly_name="GDC_Platformer_Template"
 
 Player=""
 Lootable=""
-smoke=""
 HeatCells=""
+Smoke=""
 
 [input]
 
