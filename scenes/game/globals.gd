@@ -9,6 +9,10 @@ var screen_size: Vector2i
 @onready var window_size: Vector2i = DisplayServer.window_get_size()
 var resolution: float = 16.0/9.0
 
+var player_health : float
+var player_temperature : float
+var player_money : float
+
 func _ready() -> void:
 	# set the window size to be 70% of the height, then set the width based off the resolution
 	screen_size = DisplayServer.screen_get_size()

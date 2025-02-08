@@ -24,9 +24,6 @@ var knockback := Vector2.ZERO
 @export var standard_body_temperature : float
 @export var stroke_thres : float
 @export var water_temp : float
-var temperature: float = 50
-var health : float = 100
-var money : float = 0
 
 # for friction
 var tile_map_layer: TileMapLayer = null
@@ -38,10 +35,10 @@ var friction: float = 1
 
 func _ready() -> void:
 	$AnimatedSprite2D.play()
-	$UI/Health.value = health
-	$UI/Temperature.value = temperature
-	$UI/Money.text = ("$ " + str(money))
-	health = 100
+	$UI/Health.value = Global.player_health
+	$UI/Temperature.value = Global.player_temperature
+	$UI/Money.text = ("$ " + str(Global.player_money))
+	Global.player_health = 100
 	
 	
 # Handles player input and movement
@@ -152,9 +149,9 @@ func _physics_process(delta: float) -> void:
 signal player_dead
 func hurt(damage : float) -> void:
 	$HitSound.play()
-	health -= damage
-	$UI/Health.value = health
-	if(health <= 0):
+	Global.player_health -= damage
+	$UI/Health.value = Global.player_health
+	if(Global.player_health <= 0):
 		player_dead.emit()
 
 func _on_hurt_box_body_entered(body):
@@ -187,14 +184,14 @@ func set_knockback(knock : Vector2) -> bool:
 	return false
 
 func cool_down(water : float):
-	if(temperature < water_temp):
+	if(Global.player_temperature < water_temp):
 		return
-	temperature -= (temperature - water_temp) * water
-	$UI/Temperature.value = temperature
+	Global.player_temperature -= (Global.player_temperature - water_temp) * water
+	$UI/Temperature.value = Global.player_temperature
 
 func add_money(amount : float):
-	money += amount
-	$UI/Money.text = ("$ " + str(money))
+	Global.player_money += amount
+	$UI/Money.text = ("$ " + str(Global.player_money))
 
 func start_picking(time : float):
 	$AnimatedSprite2D.animation = "pick"
@@ -215,11 +212,11 @@ func interrupt_lockpicking():
 
 func conduct_heat(env_temp : float):
 	if env_temp > standard_body_temperature:
-		temperature += (env_temp - temperature)* heat_sensitivity
-	temperature += (standard_body_temperature - temperature) * heat_recover
-	$UI/Temperature.value = temperature
+		Global.player_temperature += (env_temp - Global.player_temperature)* heat_sensitivity
+	Global.player_temperature += (standard_body_temperature - Global.player_temperature) * heat_recover
+	$UI/Temperature.value = Global.player_temperature
 	
-	if temperature > stroke_thres:
+	if Global.player_temperature > stroke_thres:
 		jumpspeed = STD_JUMP_VELOCITY * 0.75
 		speed = STD_SPEED * 0.5
 		$AnimatedSprite2D.speed_scale = 0.5
@@ -228,6 +225,6 @@ func conduct_heat(env_temp : float):
 		speed = STD_SPEED
 		$AnimatedSprite2D.speed_scale = 1
 	
-	if temperature >= 100 :
-		hurt(temperature / 15)
+	if Global.player_temperature >= 100 :
+		hurt(Global.player_temperature / 15)
 	pass

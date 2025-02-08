@@ -13,6 +13,9 @@ func _ready() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	Global.player_health = 100
+	Global.player_temperature = 50
+	Global.player_money = 0
 	Global.play_button_press_sound()
 	Global.change_level(game_scene)
 
