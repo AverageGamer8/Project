@@ -232,7 +232,7 @@ position = Vector2(0, 20)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ntf1i")
 animation = &"pick"
-frame_progress = 0.814863
+frame_progress = 0.781084
 speed_scale = 1.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

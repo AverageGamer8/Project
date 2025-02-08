@@ -20,7 +20,7 @@ var lockpicking_timer : float
 
 var knockback := Vector2.ZERO
 
-var temperature: float = 80
+var temperature: float = 50
 var health : float = 100
 var money : float = 0
 # for friction
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			$Progress .hide()
 		
 	speed = minf(STD_SPEED, (1.75*STD_SPEED - STD_SPEED * temperature * 0.0125))
-	jumpspeed = minf(STD_JUMP_VELOCITY, (1.75*STD_JUMP_VELOCITY - STD_JUMP_VELOCITY * temperature * 0.0125))
+	jumpspeed = maxf(STD_JUMP_VELOCITY, (1.75*STD_JUMP_VELOCITY - STD_JUMP_VELOCITY * temperature * 0.0125))
 	# Add gravity if in the air
 	if not is_on_floor():
 		var grav := 0.0

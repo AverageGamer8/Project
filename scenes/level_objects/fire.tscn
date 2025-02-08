@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://rk5sxspxgp8e"]
+[gd_scene load_steps=10 format=3 uid="uid://rk5sxspxgp8e"]
 
 [ext_resource type="Texture2D" uid="uid://dnx8k4yql6ond" path="res://assets/art/flame.png" id="1_5u8vh"]
+[ext_resource type="Script" path="res://scenes/level_objects/fire.gd" id="1_t0fue"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wjtiv"]
 atlas = ExtResource("1_5u8vh")
@@ -49,12 +50,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 12.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Fire" type="Node2D"]
+script = ExtResource("1_t0fue")
+smoke_addr = "res://scenes/level_objects/smoke.tscn"
+probability = 0.2
+interval = 0.2
+smokeVelocity = Vector2(0, -20)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_r56te")
-frame_progress = 0.117652
+frame_progress = 0.164173
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
