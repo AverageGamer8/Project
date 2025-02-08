@@ -2,19 +2,21 @@ extends CharacterBody2D
 class_name Player
 
 # movement parameters (play with them in the inspector ->)
-@export var STDSPEED: float = 500
+@export var STD_SPEED: float = 500
 @export var ACCEL_TIME: float = 0.1  # time to full speed in seconds
-@export var JUMP_VELOCITY: float = -1000 # (negative is up, positive is down)
+@export var STD_JUMP_VELOCITY: float = -1000 # (negative is up, positive is down)
 @export var JUMP_GRAVITY_MIN: float = 2000  # Short press
 @export var JUMP_GRAVITY_MAX: float = 2500  # Long press
 @export var FALL_GRAVITY: float = 3000  # fall faster than you rise
-var speed = STDSPEED
+var speed = STD_SPEED
+var jumpspeed = STD_JUMP_VELOCITY
 
 const terminal_velocity := 1000.0
 const max_jump_held_time := 1.0
 var jump_held_timer := 0.0
 var jump_held := false                  # if jump button is held
-
+var lockpicking := false
+var lockpicking_timer : float
 
 var knockback := Vector2.ZERO
 
@@ -41,8 +43,17 @@ func _physics_process(delta: float) -> void:
 	if jump_held:
 		jump_held_timer += delta
 	
-	speed = minf(STDSPEED, 1.75*STDSPEED - STDSPEED * temperature * 0.00125)
+	if lockpicking:
+		$Progress.value += delta
+		lockpicking_timer -= delta
+		if lockpicking_timer <= 0:
+			lockpicking = false
+			$AnimatedSprite2D.animation = "idle"
+			$AnimatedSprite2D.play()
+			$Progress .hide()
 		
+	speed = minf(STD_SPEED, (1.75*STD_SPEED - STD_SPEED * temperature * 0.0125))
+	jumpspeed = minf(STD_JUMP_VELOCITY, (1.75*STD_JUMP_VELOCITY - STD_JUMP_VELOCITY * temperature * 0.0125))
 	# Add gravity if in the air
 	if not is_on_floor():
 		var grav := 0.0
@@ -62,8 +73,9 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump if on the ground
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		interrupt_lockpicking()
 		$JumpSound.play()
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jumpspeed
 		jump_held = true
 		jump_held_timer = 0.0
 		
@@ -89,6 +101,7 @@ func _physics_process(delta: float) -> void:
 
 	# if moving, we accelerate in that direction
 	if (direction != 0):
+		interrupt_lockpicking()
 		if (direction > 0 and velocity.x < max_speed) or \
 		   (direction < 0 and velocity.x > -max_speed) or \
 		   is_on_floor():
@@ -109,20 +122,21 @@ func _physics_process(delta: float) -> void:
 
 	# ANIMATION
 	# -------------------------------------------------
-	if (is_on_floor()):
-		if (direction != 0):
-			$AnimatedSprite2D.animation = "walk"
-			$AnimatedSprite2D.play()
+	if(not lockpicking):
+		if (is_on_floor()):
+			if (direction != 0):
+				$AnimatedSprite2D.animation = "walk"
+				$AnimatedSprite2D.play()
+			else:
+				$AnimatedSprite2D.animation = "idle"
+				$AnimatedSprite2D.play()
+		elif (velocity.y <= 0):
+			$AnimatedSprite2D.animation = "jump"
 		else:
-			$AnimatedSprite2D.animation = "idle"
+			$AnimatedSprite2D.animation = "fall"
 			$AnimatedSprite2D.play()
-	elif (velocity.y <= 0):
-		$AnimatedSprite2D.animation = "jump"
-	else:
-		$AnimatedSprite2D.animation = "fall"
-		$AnimatedSprite2D.play()
-	if (direction != 0):
-		$AnimatedSprite2D.flip_h = direction == -1
+		if (direction != 0):
+			$AnimatedSprite2D.flip_h = direction == -1
 		
 	
 	move_and_slide() # moves and collides player based on velocity
@@ -173,3 +187,20 @@ func cool_down(water : float):
 func add_money(amount : float):
 	money += amount
 	$UI/Money.text = ("$ " + str(money))
+
+func start_picking(time : float):
+	$AnimatedSprite2D.animation = "pick"
+	$AnimatedSprite2D.play("pick")
+	$Progress.show()
+	$Progress.max_value = time * 1.2
+	$Progress.value = 0
+	lockpicking = true
+	lockpicking_timer = time
+	
+func interrupt_lockpicking():
+	if(lockpicking):
+		lockpicking = false
+		$AnimatedSprite2D.animation = "idle"
+		$AnimatedSprite2D.play()
+		$Progress .hide()
+		EventBus.player_lockpicking_interrupt.emit()

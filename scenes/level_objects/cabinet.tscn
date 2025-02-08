@@ -20,10 +20,11 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq3n1"]
 
-[node name="cabinet" type="Area2D"]
+[node name="cabinet" type="Area2D" groups=["Lootable"]]
 script = ExtResource("1_vjbjy")
 money = 130
-water = 0.5
+water = 0.3
+use_time = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wnstw")
@@ -31,3 +32,8 @@ sprite_frames = SubResource("SpriteFrames_wnstw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_oq3n1")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

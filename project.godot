@@ -37,6 +37,7 @@ project/assembly_name="GDC_Platformer_Template"
 [global_group]
 
 Player=""
+Lootable=""
 
 [input]
 
