@@ -1,21 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7cx4o7enre1n"]
+[gd_scene load_steps=7 format=3 uid="uid://235lugd68qku"]
 
-[ext_resource type="Script" path="res://scenes/level_objects/lootables/lootable.gd" id="1_oxn6y"]
-[ext_resource type="Texture2D" uid="uid://cjhjuvusbgshv" path="res://assets/art/furnitures.png" id="2_nsf8e"]
+[ext_resource type="Script" path="res://scenes/level_objects/lootables/lootable.gd" id="1_j1mmk"]
+[ext_resource type="Texture2D" uid="uid://cjhjuvusbgshv" path="res://assets/art/furnitures.png" id="2_38vxo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_whx6k"]
-atlas = ExtResource("2_nsf8e")
-region = Rect2(128, 0, 64, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyo20"]
+atlas = ExtResource("2_38vxo")
+region = Rect2(256, 0, 64, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_05pl4"]
-atlas = ExtResource("2_nsf8e")
-region = Rect2(192, 0, 64, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oxni"]
+atlas = ExtResource("2_38vxo")
+region = Rect2(320, 0, 64, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wnstw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_whx6k")
+"texture": SubResource("AtlasTexture_eyo20")
 }],
 "loop": true,
 "name": &"default",
@@ -23,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_05pl4")
+"texture": SubResource("AtlasTexture_3oxni")
 }],
 "loop": true,
 "name": &"looted",
@@ -32,16 +32,15 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq3n1"]
 
-[node name="water_station" type="Area2D" groups=["Lootable"]]
-script = ExtResource("1_oxn6y")
-water = 0.5
-use_time = 1.0
+[node name="fire_extg" type="Area2D" groups=["Lootable"]]
+script = ExtResource("1_j1mmk")
+water = 0.8
+use_time = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_wnstw")
-animation = &"looted"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3, 3)
