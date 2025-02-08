@@ -6,7 +6,7 @@ extends Node2D
 @export var smokeVelocity : Vector2
 var smoke : PackedScene
 
-var fire_temperature = 200
+var fire_temperature = 1000
 
 var player : Player = null
 

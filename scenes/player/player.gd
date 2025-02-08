@@ -226,5 +226,5 @@ func conduct_heat(env_temp : float):
 		$AnimatedSprite2D.speed_scale = 1
 	
 	if Global.player_temperature >= 100 :
-		hurt(Global.player_temperature / 15)
+		hurt(Global.player_temperature / 100)
 	pass

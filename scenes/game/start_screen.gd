@@ -1,7 +1,7 @@
 extends Node
 
 
-var game_scene: PackedScene = preload("res://scenes/levels/level_2.tscn")
+var game_scene: PackedScene = preload("res://scenes/levels/level_4.tscn")
 @onready var start_button: Button = $MarginContainer/VBoxContainer/VBoxContainer/StartButton
 
 
@@ -16,6 +16,7 @@ func _on_start_button_pressed() -> void:
 	Global.player_health = 100
 	Global.player_temperature = 50
 	Global.player_money = 0
+	Global.player_ammo = 5
 	Global.play_button_press_sound()
 	Global.change_level(game_scene)
 
