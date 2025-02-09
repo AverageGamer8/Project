@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hco2cs41c53d"]
 
-[ext_resource type="PackedScene" uid="uid://brokwxc71enyh" path="res://scenes/level_objects/saw.tscn" id="1_3a4m3"]
+[ext_resource type="PackedScene" uid="uid://brokwxc71enyh" path="res://scenes/level_objects/enemy.tscn" id="1_3a4m3"]
 [ext_resource type="PackedScene" uid="uid://cy48h4u3uff4a" path="res://scenes/level_objects/shooter.tscn" id="2_x44w8"]
 
 [node name="ShootingEnemy" type="Node2D"]

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_mvwvm"]
 [ext_resource type="Texture2D" uid="uid://cvoffopjjxg2x" path="res://assets/art/Sprite-0002.png" id="2_mkfy4"]
-[ext_resource type="AudioStream" uid="uid://bdswmu3wsk7ib" path="res://assets/audio/bounce.mp3" id="3_o6pqk"]
-[ext_resource type="AudioStream" uid="uid://bct7m4hrjhi6u" path="res://assets/audio/gruntsound.wav" id="4_iscyc"]
+[ext_resource type="AudioStream" uid="uid://ce88tea7vago6" path="res://assets/audio/MI_SFX 44.wav" id="3_xbqkc"]
 [ext_resource type="Theme" uid="uid://qseykuvemo1o" path="res://resources/themes/normal_text.tres" id="5_fc2k0"]
+[ext_resource type="AudioStream" uid="uid://dw58fb5f3i84h" path="res://assets/audio/classic_hurt.mp3" id="7_83mw2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wa6im"]
 atlas = ExtResource("2_mkfy4")
@@ -144,7 +144,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,7 +161,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -184,7 +184,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"pick",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 15.0
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucb8u"]
@@ -224,23 +224,20 @@ size = Vector2(46, 85)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 200
-collision_layer = 49
-collision_mask = 35
+collision_layer = 17
+collision_mask = 3
 script = ExtResource("1_mvwvm")
 heat_sensitivity = 0.04
 heat_recover = 0.001
 standard_body_temperature = 30.0
 stroke_thres = 65.0
 water_temp = 10.0
-HEALTH_REGEN = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 22)
+position = Vector2(0, 20)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ntf1i")
-animation = &"fall"
-
-[node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 21.5)
@@ -250,15 +247,10 @@ shape = SubResource("RectangleShape2D_ucb8u")
 position = Vector2(0, 78)
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_o6pqk")
-volume_db = 24.0
+stream = ExtResource("3_xbqkc")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
-volume_db = 10.0
-
-[node name="Grunt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_iscyc")
-volume_db = 2.0
+stream = ExtResource("7_83mw2")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 8
@@ -315,9 +307,5 @@ grow_vertical = 2
 max_value = 60.0
 show_percentage = false
 
-[node name="Healtimer" type="Timer" parent="."]
-autostart = true
-
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
-[connection signal="timeout" from="Healtimer" to="." method="_on_healtimer_timeout"]

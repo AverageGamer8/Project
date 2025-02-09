@@ -7,6 +7,7 @@
 scale = Vector2(0.5, 0.5)
 
 [node name="Enemy" parent="." index="0" instance=ExtResource("2_rudhl")]
+scale = Vector2(1, 1)
 
 [node name="RemoteTransform2D" parent="PathFollow2D" index="0"]
 remote_path = NodePath("../../Enemy")

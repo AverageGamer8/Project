@@ -13,6 +13,8 @@ func _ready() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	var next_level = randi_range(1, Global.total_levels - 1)
+	game_scene = load(Global.levels[next_level])
 	Global.player_health = 100
 	Global.player_temperature = 50
 	Global.player_money = 0

@@ -24,13 +24,10 @@ var knockback := Vector2.ZERO
 @export var standard_body_temperature : float
 @export var stroke_thres : float
 @export var water_temp : float
-@export var HEALTH_REGEN : float
 
 # for friction
 var tile_map_layer: TileMapLayer = null
 @onready var tile_collider := $TileCollider
-var dust_particle: PackedScene
-var dust_addr = "res://scenes/player/dust.tscn"
 var friction: float = 1
 
 
@@ -40,7 +37,6 @@ func _ready() -> void:
 	$UI/Temperature.value = Global.player_temperature
 	$UI/Money.text = ("$ " + str(Global.player_money))
 	Global.player_health = 100
-	$Healtimer.start()
 	
 	
 # Handles player input and movement
@@ -82,10 +78,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		interrupt_lockpicking()
 		$JumpSound.play()
-		dust_particle = load(dust_addr) as PackedScene
-		var d = dust_particle.instantiate()
-		d.spawnPos = global_position
-		self.get_parent().add_child(d)
 		velocity.y = jumpspeed
 		jump_held = true
 		jump_held_timer = 0.0
@@ -93,10 +85,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("jump") and jump_held:
 		jump_held = false
 
-	if Input.is_action_just_pressed("step_down") and is_on_floor():
-		set_collision_mask_value(6, false)
-		var timer = get_tree().create_timer(0.4)
-		timer.connect("timeout", _on_drop_timeout)
 	# HORIZONTAL MOVEMENT
 	# -------------------------------------------------
 	# if on floor, get friction of tile below
@@ -160,14 +148,6 @@ signal player_dead
 func hurt(damage : float) -> void:
 	$HitSound.play()
 	Global.player_health -= damage
-	$UI/Health.value = Global.player_health
-	if(Global.player_health <= 0):
-		player_dead.emit()
-
-func heat_stroke() -> void:
-	$Grunt.play()
-	Global.player_health -= Global.player_temperature / 100
-	Global.player_temperature -= 5
 	$UI/Health.value = Global.player_health
 	if(Global.player_health <= 0):
 		player_dead.emit()
@@ -244,17 +224,5 @@ func conduct_heat(env_temp : float):
 		$AnimatedSprite2D.speed_scale = 1
 	
 	if Global.player_temperature >= 100 :
-		heat_stroke()
+		hurt(Global.player_temperature / 100)
 	pass
-	
-func _on_drop_timeout():
-	set_collision_mask_value(6, true)
-
-func _on_healtimer_timeout() -> void:
-	if Global.player_health > 0 and Global.player_health < 100:
-		Global.player_health += HEALTH_REGEN
-		$UI/Health.value = Global.player_health
-	pass # Replace with function body.
-
-
-	
