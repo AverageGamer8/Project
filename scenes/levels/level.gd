@@ -3,6 +3,8 @@ class_name Level
 
 var next_level : PackedScene
 
+@export var level_num : int
+
 @export var flip_blocks : bool
 @export var flip_timer : float
 var tik_flags = [false, false, false]
@@ -72,6 +74,7 @@ func get_limits() -> Rect2i:
 
 # loads the next level scene and bring up level cleared screen
 func level_cleared(level_path : String) -> void:
+	Global.prev_level = level_num
 	%WinSound.play()
 	next_level = load(level_path) as PackedScene
 	$ClearScreen.visible = true

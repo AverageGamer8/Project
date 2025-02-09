@@ -1,24 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://brokwxc71enyh"]
+[gd_scene load_steps=7 format=3 uid="uid://brokwxc71enyh"]
 
 [ext_resource type="Script" path="res://scenes/level_objects/enemy.gd" id="1_f8rs0"]
+[ext_resource type="Texture2D" uid="uid://cs3pbon23e88k" path="res://assets/art/star.png" id="2_3txhn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8uulp"]
-radius = 26.0768
+radius = 68.0294
 
 [sub_resource type="Animation" id="Animation_gsj2f"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_x1apg"]
 resource_name = "spin"
@@ -43,11 +32,14 @@ _data = {
 }
 
 [node name="Enemy" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_f8rs0")
-interval = 0.5
+interval = 0.33
+collision_damage = 10
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3txhn")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -57,6 +49,7 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_8uulp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_a0gnr")
 }

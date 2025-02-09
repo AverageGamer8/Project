@@ -5,6 +5,8 @@ extends Node
 
 var startScreen : PackedScene = load("res://scenes/game/start_screen.tscn")
 
+var prev_level : int
+
 var screen_size: Vector2i
 @onready var window_size: Vector2i = DisplayServer.window_get_size()
 var resolution: float = 16.0/9.0
@@ -16,6 +18,7 @@ var player_ammo : int
 var levels_cleared : int
 
 func _ready() -> void:
+	prev_level = 0
 	# set the window size to be 70% of the height, then set the width based off the resolution
 	screen_size = DisplayServer.screen_get_size()
 	window_size = Vector2i(round(screen_size.y*0.5*resolution),

@@ -1,9 +1,9 @@
 extends Node
 
 
-var game_scene: PackedScene = preload("res://scenes/levels/level_4.tscn")
+var game_scene: PackedScene = preload("res://scenes/levels/level_6.tscn") # need to randomize level order
 @onready var start_button: Button = $MarginContainer/VBoxContainer/VBoxContainer/StartButton
-
+# also perhaps store images of levels
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

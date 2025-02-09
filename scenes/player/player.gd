@@ -31,8 +31,6 @@ var tile_map_layer: TileMapLayer = null
 var friction: float = 1
 
 
-
-
 func _ready() -> void:
 	$AnimatedSprite2D.play()
 	$UI/Health.value = Global.player_health
