@@ -76,20 +76,35 @@ func get_limits() -> Rect2i:
 
 # loads the next level scene and bring up level cleared screen
 func level_cleared(level_path : String) -> void:
-	Global.prev_level = level_num
-	%WinSound.play()
-	next_level = load(level_path) as PackedScene
-	$ClearScreen.visible = true
-	%Button.grab_focus()
-	get_tree().paused = true
+	Global.prev_level = Global.current_level
+	var next_level = randi_range(1, Global.total_levels - 1)
+	Global.current_level = next_level
+	$ClearScreen.show()
+	Global.levels_cleared += 1
+	var game_scene = load(Global.levels[next_level]) as PackedScene
+	Global.change_level(game_scene)
 	
-func _on_button_pressed() -> void:
-	get_tree().paused = false
-	Global.change_level(next_level)
+func attempt_exit():
+	$Confirm.show()
+	$Confirm/CenterContainer/VBoxContainer/Yes.grab_focus()
+	get_tree().paused = true
 
+func _on_yes_pressed():
+	#Yes
+	get_tree().paused = false
+	$Confirm.hide()
+	var clear = load("res://scenes/game/clear_screen.tscn") as PackedScene
+	Global.change_level(clear)
+
+func _on_no_pressed():
+	#no
+	get_tree().paused = false
+	$Confirm.hide()
+	
 
 func _on_player_player_dead():
-	$Player.position = playerRespawn
+	var clear = load("res://scenes/game/clear_screen.tscn") as PackedScene
+	Global.change_level(clear)
 
 const greenTilesheets = [preload("res://assets/art/flip_block_green_off_tilesheet.png"),
 						 preload("res://assets/art/flip_block_green_on_tilesheet.png")]
