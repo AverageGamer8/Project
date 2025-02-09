@@ -75,10 +75,11 @@ func get_limits() -> Rect2i:
 	return used_rect
 
 # loads the next level scene and bring up level cleared screen
-func level_cleared(level_path : String) -> void:
+func level_cleared() -> void:
 	Global.prev_level = level_num
 	%WinSound.play()
-	next_level = load(level_path) as PackedScene
+	var next_level = randi_range(1, Global.total_levels - 1)
+	next_level = load(Global.levels[next_level]) as PackedScene
 	$ClearScreen.visible = true
 	%Button.grab_focus()
 	get_tree().paused = true

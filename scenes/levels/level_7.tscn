@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://kmi8quvtnaa1" path="res://scenes/levels/level.tscn" id="1_c2vcq"]
 [ext_resource type="PackedScene" uid="uid://4hryb5cbh2nx" path="res://scenes/game/heat_grid.tscn" id="2_4bb5t"]
 [ext_resource type="PackedScene" uid="uid://jwr35uhwma57" path="res://scenes/level_objects/doorway.tscn" id="3_6ukpe"]
-[ext_resource type="PackedScene" uid="uid://ia7pv7eb6jfa" path="res://scenes/level_objects/moving_enemy.tscn" id="4_oe6dn"]
+[ext_resource type="PackedScene" uid="uid://ia7pv7eb6jfa" path="res://scenes/level_objects/moving_saw.tscn" id="4_oe6dn"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jtcdu"]
 scenes/1/scene = ExtResource("2_4bb5t")

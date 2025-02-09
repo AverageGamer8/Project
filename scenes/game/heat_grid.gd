@@ -14,6 +14,7 @@ var right_adj : HeatCell
 @export var heat_per_smoke : float
 @export var heat_loss : float
 @export var environment_temp : float
+@export var grid_trans : int
 
 var player : Player = null
 
@@ -48,7 +49,7 @@ func get_heatcell(cell: Vector2i) -> HeatCell:
 
 func _on_tick_timeout() -> void:
 	add_heat(smoke_count * heat_per_smoke)
-	$ColorRect.color.a8 = minf(temperature, 255) / 1
+	$ColorRect.color.a8 = minf(temperature, 255) / grid_trans
 	$Label.text = str(floor(temperature))
 	if up_adj:
 		var amount = (temperature - up_adj.temperature) * conductivity

@@ -5,6 +5,11 @@ extends Node
 
 var startScreen : PackedScene = load("res://scenes/game/start_screen.tscn")
 
+var total_levels = 10
+var levels : Array
+var level_images : Array
+
+
 var prev_level : int
 
 var screen_size: Vector2i
@@ -19,6 +24,10 @@ var levels_cleared : int
 
 func _ready() -> void:
 	prev_level = 0
+	for i in total_levels:
+		levels.append("res://scenes/levels/level_" + str(i) + ".tscn")
+	#for i in total_levels:
+		#levels.append("res://scenes/levels/level_" + str(i) + ".tscn")
 	# set the window size to be 70% of the height, then set the width based off the resolution
 	screen_size = DisplayServer.screen_get_size()
 	window_size = Vector2i(round(screen_size.y*0.5*resolution),

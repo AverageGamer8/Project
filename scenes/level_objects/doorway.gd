@@ -8,4 +8,4 @@ func _ready():
 	super()
 
 func interaction() -> void:
-	level.level_cleared(to_level)
+	level.level_cleared()
