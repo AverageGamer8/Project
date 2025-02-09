@@ -21,9 +21,7 @@ func _input(event: InputEvent) -> void:
 # called from QuitButton via signal
 func _on_quit_button_pressed() -> void:
 	Global.play_button_press_sound()
-	Global.unpause_game()
-	hide()
-	load("res://scenes/game/start_screen.tscn")
+	get_tree().quit()
 
 
 # called from ContinueButton via signal, or from above when ui_cancel is pressed

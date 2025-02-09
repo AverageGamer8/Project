@@ -1,10 +1,67 @@
-[gd_scene load_steps=7 format=3 uid="uid://brokwxc71enyh"]
+[gd_scene load_steps=15 format=3 uid="uid://brokwxc71enyh"]
 
 [ext_resource type="Script" path="res://scenes/level_objects/enemy.gd" id="1_f8rs0"]
-[ext_resource type="Texture2D" uid="uid://cs3pbon23e88k" path="res://assets/art/star.png" id="2_3txhn"]
+[ext_resource type="Texture2D" uid="uid://c7twm5dkv1ta1" path="res://assets/art/crawler.png" id="2_dqid6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6ntw"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_calkb"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akspn"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj2yv"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pime7"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip4js"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j752i"]
+atlas = ExtResource("2_dqid6")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_am17t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6ntw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_calkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akspn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj2yv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pime7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip4js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j752i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8uulp"]
-radius = 68.0294
+radius = 26.0768
 
 [sub_resource type="Animation" id="Animation_gsj2f"]
 length = 0.001
@@ -15,7 +72,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,14 +89,14 @@ _data = {
 }
 
 [node name="Enemy" type="Node2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_f8rs0")
 interval = 0.33
 collision_damage = 10
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_3txhn")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_am17t")
+frame_progress = 0.8852
 
 [node name="Timer" type="Timer" parent="."]
 

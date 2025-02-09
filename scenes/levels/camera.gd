@@ -5,6 +5,28 @@ extends Camera2D
 # Sets the camera limits to the given rectangle bounding box
 #   If the bounding box is smaller than the viewport, make the limit size the same
 #   as the viewport
+var shaking: bool = false
+var x_magnitude = 0.0
+var y_magnitude = 0.0
+var k = 6
+var rho = 0.1
+var v:Vector2
+var t = 0
+
+#
+#func _physics_process(delta: float) -> void:
+	#if(t > 0):
+		#position = Vector2(x_magnitude*t*cos(k*t), y_magnitude*t*cos(k*t))
+		#t -= 1
+	#
+#func shake(pos:Vector2):
+	#t = 20
+	#x_magnitude = pos.x * 0.1
+	#y_magnitude = pos.y * 0.1
+
+
+
+
 func set_limits(limits: Rect2i) -> void:
 	var x: int = int((limits.position.x +limits.end.x) / 2.0)
 	var y: int = int((limits.position.y +limits.end.y) / 2.0)
