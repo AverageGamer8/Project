@@ -36,6 +36,8 @@ func _ready() -> void:
 	$Player.tile_map_layer = $LevelTileMap
 
 	$Camera2D.set_limits(get_limits())
+	
+	#$"Previous Level Image".texture = load()
 
 func _input(event) -> void:
 	# pause button pressed!
