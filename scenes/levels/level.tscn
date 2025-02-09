@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://kmi8quvtnaa1"]
+[gd_scene load_steps=12 format=3 uid="uid://kmi8quvtnaa1"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_02dsu"]
-[ext_resource type="Texture2D" uid="uid://do3u01fttefc" path="res://assets/art/background.png" id="2_se2tx"]
+[ext_resource type="Texture2D" uid="uid://blj5vpqvpqljs" path="res://assets/art/backbackground_2.png" id="2_cviqm"]
 [ext_resource type="PackedScene" uid="uid://cxsrdo3dax7kl" path="res://scenes/levels/level_tile_map.tscn" id="3_s17ow"]
+[ext_resource type="Texture2D" uid="uid://cas124xc8xcsq" path="res://assets/art/background_2.png" id="3_v5r53"]
 [ext_resource type="Script" path="res://scenes/levels/camera.gd" id="4_0gqqb"]
 [ext_resource type="PackedScene" uid="uid://d4n1kp3j8smdl" path="res://scenes/player/player.tscn" id="5_7qipm"]
 [ext_resource type="Theme" uid="uid://qseykuvemo1o" path="res://resources/themes/normal_text.tres" id="6_wcg1p"]
@@ -17,11 +18,23 @@ flip_timer = 1.5
 
 [node name="TickTimer" type="Timer" parent="."]
 
-[node name="Background" type="TextureRect" parent="."]
-offset_right = 688.0
-offset_bottom = 384.0
-texture = ExtResource("2_se2tx")
-stretch_mode = 1
+[node name="Background2" type="Node" parent="."]
+
+[node name="backbg" type="Parallax2D" parent="Background2"]
+z_index = -10
+scroll_scale = Vector2(0.7, 0.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background2/backbg"]
+position = Vector2(1540, -625)
+scale = Vector2(1.17286, 1.23556)
+texture = ExtResource("2_cviqm")
+
+[node name="bg" type="Parallax2D" parent="Background2"]
+z_index = -5
+
+[node name="Sprite2D" type="Sprite2D" parent="Background2/bg"]
+position = Vector2(1497, -442)
+texture = ExtResource("3_v5r53")
 
 [node name="LevelTileMap" parent="." instance=ExtResource("3_s17ow")]
 

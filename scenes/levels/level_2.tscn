@@ -15,14 +15,14 @@
 [ext_resource type="AudioStream" uid="uid://ddcdrs6xkc0hr" path="res://assets/audio/tik.wav" id="13_r1es7"]
 [ext_resource type="AudioStream" uid="uid://bc3p7clretgle" path="res://assets/audio/tok.wav" id="14_ei58d"]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_cwdar"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_odmx6"]
 scenes/1/scene = ExtResource("2_g30s2")
 
 [sub_resource type="TileSet" id="TileSet_4o7vl"]
 tile_size = Vector2i(64, 64)
 custom_data_layer_0/name = "t"
 custom_data_layer_0/type = 3
-sources/0 = SubResource("TileSetScenesCollectionSource_cwdar")
+sources/0 = SubResource("TileSetScenesCollectionSource_odmx6")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_t673a")
