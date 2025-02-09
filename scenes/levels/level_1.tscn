@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://jwr35uhwma57" path="res://scenes/level_objects/doorway.tscn" id="2_egn4l"]
 [ext_resource type="PackedScene" uid="uid://vvam43ag8h3m" path="res://scenes/level_objects/checkpoint.tscn" id="3_m1pq4"]
 [ext_resource type="PackedScene" uid="uid://bor4swn0xlf3" path="res://scenes/level_objects/moving_platform.tscn" id="5_lhavx"]
-[ext_resource type="PackedScene" uid="uid://ia7pv7eb6jfa" path="res://scenes/level_objects/moving_saw.tscn" id="6_lshuj"]
+[ext_resource type="PackedScene" uid="uid://ia7pv7eb6jfa" path="res://scenes/level_objects/moving_enemy.tscn" id="6_lshuj"]
 [ext_resource type="PackedScene" uid="uid://b2jg8sal7ohw2" path="res://scenes/level_objects/slime.tscn" id="6_vbs7r"]
 
 [sub_resource type="Curve2D" id="Curve2D_4lj85"]

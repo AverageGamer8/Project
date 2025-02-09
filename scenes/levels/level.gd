@@ -14,6 +14,7 @@ var tik_flags = [false, false, false]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	if (flip_blocks):
 		$TickTimer.start(flip_timer)
 		$TickTimer.connect("timeout", $Player.flip_collision)
@@ -29,7 +30,6 @@ func _ready() -> void:
 		if (child is LevelObject):
 			child.player = $Player
 			child.level = self
-
 	# Give the player a reference to the tile map
 	$Player.tile_map_layer = $LevelTileMap
 

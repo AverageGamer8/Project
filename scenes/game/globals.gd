@@ -13,6 +13,7 @@ var player_health : float
 var player_temperature : float
 var player_money : float
 var player_ammo : int
+var levels_cleared : int
 
 func _ready() -> void:
 	# set the window size to be 70% of the height, then set the width based off the resolution

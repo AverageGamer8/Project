@@ -17,6 +17,7 @@ func _on_start_button_pressed() -> void:
 	Global.player_temperature = 50
 	Global.player_money = 0
 	Global.player_ammo = 5
+	Global.levels_cleared = 0
 	Global.play_button_press_sound()
 	Global.change_level(game_scene)
 

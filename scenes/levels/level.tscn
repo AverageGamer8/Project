@@ -57,7 +57,7 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="ClearScreen/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_wcg1p")
-text = "Level Cleared!"
+text = "Floor explored."
 horizontal_alignment = 1
 vertical_alignment = 3
 
@@ -67,7 +67,7 @@ custom_minimum_size = Vector2(273.06, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_ibphr")
-text = "Next Level"
+text = "Next Floor"
 
 [node name="WinSound" type="AudioStreamPlayer" parent="ClearScreen"]
 unique_name_in_owner = true
