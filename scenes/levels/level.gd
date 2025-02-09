@@ -76,12 +76,12 @@ func get_limits() -> Rect2i:
 
 # loads the next level scene and bring up level cleared screen
 func level_cleared(level_path : String) -> void:
-	Global.prev_level = level_num
-	%WinSound.play()
-	next_level = load(level_path) as PackedScene
-	$ClearScreen.visible = true
-	%Button.grab_focus()
-	get_tree().paused = true
+	Global.prev_level = Global.current_level
+	var next_level = randi_range(1, Global.total_levels - 1)
+	Global.current_level = next_level
+	$ClearScreen.show()
+	var game_scene = load(Global.levels[next_level]) as PackedScene
+	Global.change_level(game_scene)
 	
 func _on_button_pressed() -> void:
 	get_tree().paused = false
