@@ -1,17 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://qnvyido44wvk"]
+[gd_scene load_steps=6 format=4 uid="uid://dffkm02286u6c"]
 
-[ext_resource type="PackedScene" uid="uid://kmi8quvtnaa1" path="res://scenes/levels/level.tscn" id="1_hxgyp"]
-[ext_resource type="PackedScene" uid="uid://jwr35uhwma57" path="res://scenes/level_objects/doorway.tscn" id="2_45fdv"]
-[ext_resource type="PackedScene" uid="uid://4hryb5cbh2nx" path="res://scenes/game/heat_grid.tscn" id="2_wfi2r"]
+[ext_resource type="PackedScene" uid="uid://kmi8quvtnaa1" path="res://scenes/levels/level.tscn" id="1_xao21"]
+[ext_resource type="PackedScene" uid="uid://4hryb5cbh2nx" path="res://scenes/game/heat_grid.tscn" id="2_yl8ns"]
+[ext_resource type="PackedScene" uid="uid://jwr35uhwma57" path="res://scenes/level_objects/doorway.tscn" id="3_0ppja"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_j2vyp"]
-scenes/1/scene = ExtResource("2_wfi2r")
+scenes/1/scene = ExtResource("2_yl8ns")
 
 [sub_resource type="TileSet" id="TileSet_4cg8k"]
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetScenesCollectionSource_j2vyp")
 
-[node name="Level" instance=ExtResource("1_hxgyp")]
+[node name="Level" instance=ExtResource("1_xao21")]
 outerwidth = 5.0
 outerheight = 5.0
 
@@ -32,6 +32,6 @@ zoom = Vector2(0.5, 0.5)
 [node name="Player" parent="." index="5"]
 position = Vector2(152, 240)
 
-[node name="Door" parent="." index="7" instance=ExtResource("2_45fdv")]
+[node name="Door" parent="." index="7" instance=ExtResource("3_0ppja")]
 position = Vector2(1500, -968)
 to_level = "res://scenes/levels/level_1.tscn"

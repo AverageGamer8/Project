@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://quds2tvuv65b"]
+
+[ext_resource type="Script" path="res://scenes/player/dust.gd" id="1_nw7ak"]
+[ext_resource type="Texture2D" uid="uid://10pkwk8qyo1o" path="res://assets/art/dust.png" id="2_c4kb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uk3p"]
+atlas = ExtResource("2_c4kb3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yqm0"]
+atlas = ExtResource("2_c4kb3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elylg"]
+atlas = ExtResource("2_c4kb3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwabl"]
+atlas = ExtResource("2_c4kb3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_om8mv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uk3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yqm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elylg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwabl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nw7ak")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.768627)
+z_index = 1
+position = Vector2(0, 48)
+scale = Vector2(3, 2)
+sprite_frames = SubResource("SpriteFrames_om8mv")
+frame = 3
+frame_progress = 1.0
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
