@@ -1,11 +1,18 @@
-[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://b3vd4sdjew4dk"]
+[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://b3vd4sdjew4dk"]
 
 [ext_resource type="Texture2D" uid="uid://bknl3xtlcpyk6" path="res://assets/art/wall_tilesheet.png" id="1_e23ca"]
 [ext_resource type="PackedScene" uid="uid://dypw6ntxewcf3" path="res://scenes/level_objects/cabinet.tscn" id="2_b77f2"]
 [ext_resource type="Texture2D" uid="uid://b6f4djp1x68y1" path="res://assets/art/flip_block_green_on_tilesheet.png" id="3_0tpve"]
 [ext_resource type="PackedScene" uid="uid://rk5sxspxgp8e" path="res://scenes/level_objects/fire.tscn" id="3_8ayt4"]
 [ext_resource type="Texture2D" uid="uid://cv5ftdv3m5457" path="res://assets/art/objects_tilesheet.png" id="3_n0eby"]
+[ext_resource type="PackedScene" uid="uid://235lugd68qku" path="res://scenes/level_objects/lootables/fire_extinguisher.tscn" id="4_8h3ta"]
 [ext_resource type="Texture2D" uid="uid://ifdpt67mxevm" path="res://assets/art/flip_block_pink_off_tilesheet.png" id="4_gxoch"]
+[ext_resource type="PackedScene" uid="uid://d3v4rfn43mnql" path="res://scenes/level_objects/lootables/safe.tscn" id="5_4w3qh"]
+[ext_resource type="PackedScene" uid="uid://65owx37xk77o" path="res://scenes/level_objects/lootables/table.tscn" id="6_44l6q"]
+[ext_resource type="PackedScene" uid="uid://hvvlxenoaeen" path="res://scenes/level_objects/lootables/vending_machine.tscn" id="7_wvjpb"]
+[ext_resource type="PackedScene" uid="uid://c7cx4o7enre1n" path="res://scenes/level_objects/lootables/water_station.tscn" id="8_pvxg4"]
+[ext_resource type="PackedScene" uid="uid://brokwxc71enyh" path="res://scenes/level_objects/enemy.tscn" id="9_08j7y"]
+[ext_resource type="PackedScene" uid="uid://hco2cs41c53d" path="res://scenes/level_objects/shooting_enemy.tscn" id="10_oqyp5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kta6"]
 resource_name = "wall"
@@ -580,6 +587,13 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k551d"]
 scenes/1/scene = ExtResource("2_b77f2")
 scenes/2/scene = ExtResource("3_8ayt4")
+scenes/3/scene = ExtResource("4_8h3ta")
+scenes/4/scene = ExtResource("5_4w3qh")
+scenes/5/scene = ExtResource("6_44l6q")
+scenes/6/scene = ExtResource("7_wvjpb")
+scenes/7/scene = ExtResource("8_pvxg4")
+scenes/8/scene = ExtResource("9_08j7y")
+scenes/9/scene = ExtResource("10_oqyp5")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p2r4f"]
 texture = ExtResource("3_n0eby")
