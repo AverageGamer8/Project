@@ -10,7 +10,8 @@ var levels : Array
 var level_images : Array
 var current_level :  int
 var prev_level : int
-var difficulty : int
+var time_spent : float
+var result : bool 
 
 var screen_size: Vector2i
 @onready var window_size: Vector2i = DisplayServer.window_get_size()
@@ -23,7 +24,9 @@ var player_ammo : int
 var levels_cleared : int
 
 func _ready() -> void:
+	result = true
 	prev_level = 0
+	time_spent = 0
 	for i in total_levels:
 		levels.append("res://scenes/levels/level_" + str(i) + ".tscn")
 	#for i in total_levels:
@@ -32,7 +35,7 @@ func _ready() -> void:
 	screen_size = DisplayServer.screen_get_size()
 	window_size = Vector2i(round(screen_size.y*0.5*resolution),
 						   round(screen_size.y*0.5))
-	
+	$Timer.start()
 	DisplayServer.window_set_size(window_size)
 	DisplayServer.window_set_position(screen_size/2 - window_size/2)
 
@@ -43,6 +46,7 @@ signal level_changed(level: PackedScene)
 
 func play_button_press_sound() -> void:
 	$ButtonSound.play()	
+
 
 
 func change_level(level: PackedScene) -> void:
@@ -61,3 +65,7 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	get_tree().paused = false
+
+
+func _on_timer_timeout():
+	time_spent += 1

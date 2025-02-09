@@ -18,6 +18,7 @@ var right_adj : HeatCell
 var player : Player = null
 
 func _ready() -> void:
+	temperature = sqrt(Global.levels_cleared) * sqrt((Global.time_spent / 60) + 1) * 20
 	smoke_count = 0
 	up_adj = get_heatcell(cell_pos + Vector2i.UP)
 	down_adj = get_heatcell(cell_pos + Vector2i.DOWN)

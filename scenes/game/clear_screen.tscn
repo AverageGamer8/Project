@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccxj44jjfnwwx"]
+
+[ext_resource type="Script" path="res://scenes/game/clear_screen.gd" id="1_l10eu"]
+[ext_resource type="Theme" uid="uid://qseykuvemo1o" path="res://resources/themes/normal_text.tres" id="2_j7gvh"]
+[ext_resource type="Theme" uid="uid://cnrdyrlmhr3x0" path="res://resources/themes/button_theme.tres" id="3_wf04m"]
+[ext_resource type="Texture2D" uid="uid://do3u01fttefc" path="res://assets/art/background.png" id="5_2lxtg"]
+
+[node name="ClearScreen" type="Node2D"]
+script = ExtResource("1_l10eu")
+
+[node name="ClearScreen" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ClearScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.109804)
+
+[node name="CenterContainer" type="CenterContainer" parent="ClearScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = 7.0
+offset_right = -376.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ClearScreen/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Money" type="Label" parent="ClearScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_j7gvh")
+text = "Money collected: $"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Button" type="Button" parent="ClearScreen/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(273.06, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_wf04m")
+text = "Return"
+
+[node name="Levels" type="Label" parent="ClearScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Levels cleared: "
+
+[node name="Win" type="TextureRect" parent="."]
+visible = false
+offset_right = 688.0
+offset_bottom = 384.0
+texture = ExtResource("5_2lxtg")
+stretch_mode = 1
+
+[node name="Lose" type="TextureRect" parent="."]
+visible = false
+offset_right = 688.0
+offset_bottom = 384.0
+texture = ExtResource("5_2lxtg")
+stretch_mode = 1
+
+[connection signal="pressed" from="ClearScreen/CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

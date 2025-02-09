@@ -14,3 +14,7 @@ visible = false
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_y1i8u")
 volume_db = -14.053
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
